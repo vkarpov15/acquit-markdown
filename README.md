@@ -34,7 +34,9 @@
       '```'
     ].join('\n'));
   
-```## It can use acquit constructor
+```
+
+## It can use acquit constructor
 
 ```javascript
 

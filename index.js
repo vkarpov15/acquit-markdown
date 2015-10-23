@@ -34,6 +34,9 @@ function recurse(blocks, level) {
     } else {
       str += ['```javascript', blocks[i].code, '```'].join('\n');
     }
+    if (i + 1 < blocks.length) {
+      str += '\n\n';
+    }
   }
   return str;
 }
