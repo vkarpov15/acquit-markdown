@@ -4,6 +4,7 @@
   "description": "Quick tool for converting acquit output to markdown",
   "main": "index.js",
   "scripts": {
+    "docs": "node docs.js",
     "test": "NODE_PATH=../ mocha --harmony test/*",
     "test-coverage": "NODE_PATH=../ istanbul cover _mocha -- --harmony -R spec ./test/*"
   },
