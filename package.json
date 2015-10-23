@@ -1,0 +1,30 @@
+{
+  "name": "acquit-markdown",
+  "version": "0.0.1",
+  "description": "Quick tool for converting acquit output to markdown",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_PATH=../ mocha --harmony test/*",
+    "test-coverage": "NODE_PATH=../ istanbul cover _mocha -- --harmony -R spec ./test/*"
+  },
+  "author": "Valeri Karpov <val@karpov.io>",
+  "license": "Apache 2.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/vkarpov15/acquit-markdown.git"
+  },
+  "peerDependencies": {
+    "acquit": ">=0.4.0"
+  },
+  "jscsConfig": {
+    "preset": "airbnb",
+    "requirePaddingNewLinesAfterBlocks": null,
+    "requireMultipleVarDecl": null,
+    "requireTrailingComma": null
+  },
+  "devDependencies": {
+    "acquit": "0.4.0",
+    "istanbul": "0.3.5",
+    "mocha": "2.0.1"
+  }
+}
