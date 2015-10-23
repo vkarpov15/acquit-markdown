@@ -1,6 +1,6 @@
 {
   "name": "acquit-markdown",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Quick tool for converting acquit output to markdown",
   "main": "index.js",
   "scripts": {
