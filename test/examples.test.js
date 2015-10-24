@@ -6,6 +6,12 @@ describe('acquit-markdown', function() {
     acquit.removeAllOutputProcessors();
   });
 
+  /**
+   * The acquit-markdown plugin adds an output processor to acquit that
+   * transforms acquit's syntax tree output into a markdown string. It
+   * converts mocha descriptions into headers, comments into paragraphs,
+   * and wraps code in backticks.
+   */
   it('converts acquit output to a simple markdown format', function() {
     var acquit = require('acquit');
     require('acquit-markdown')();
