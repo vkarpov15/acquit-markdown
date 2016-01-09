@@ -4,25 +4,27 @@ var acquit = require('acquit');
 
 module.exports = plugin;
 
-function plugin(instance) {
+function plugin(instance, options) {
   if (instance) {
-    instance.output(markdown);
+    instance.output(markdown(options));
   } else {
-    acquit.output(markdown);
+    acquit.output(markdown(options));
   }
 };
 
 plugin.markdown = markdown;
 
-function markdown(res) {
-  return recurse(res, 0);
+function markdown(options) {
+  return function(res) {
+    return recurse(res, 0, options);
+  };
 }
 
-function recurse(blocks, level) {
+function recurse(blocks, level, options) {
   var str = '';
   var hashes = getHashes(level + 1);
   for (var i = 0; i < blocks.length; ++i) {
-    str += hashes + ' ' + (blocks[i].type === 'it' ? 'It ' : '') +
+    str += hashes + ' ' + (blocks[i].type === 'it' ? (!options || !options.it ? 'It ': '') : '') +
       blocks[i].contents;
     str += '\n\n';
     for (var j = 0; j < blocks[i].comments.length; ++j) {
@@ -30,7 +32,7 @@ function recurse(blocks, level) {
       str += '\n\n';
     }
     if (blocks[i].type === 'describe') {
-      str += recurse(blocks[i].blocks, level + 1);
+      str += recurse(blocks[i].blocks, level + 1, options);
     } else {
       str += ['```javascript', blocks[i].code, '```'].join('\n');
     }
