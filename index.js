@@ -24,8 +24,10 @@ function recurse(blocks, level, options) {
   var str = '';
   var hashes = getHashes(level + 1);
   for (var i = 0; i < blocks.length; ++i) {
-    str += hashes + ' ' + (blocks[i].type === 'it' ? (!options || !options.it ? 'It ': '') : '') +
-      blocks[i].contents;
+    if (blocks[i].contents) {
+      str += hashes + ' ' + (blocks[i].type === 'it' ? (!options || !options.it ? 'It ': '') : '') +
+        blocks[i].contents;
+    }
     str += '\n\n';
     for (var j = 0; j < blocks[i].comments.length; ++j) {
       str += acquit.trimEachLine(blocks[i].comments[j]);
