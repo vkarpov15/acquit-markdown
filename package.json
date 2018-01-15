@@ -4,7 +4,7 @@
   "description": "Quick tool for converting acquit output to markdown",
   "main": "index.js",
   "bin": {
-    "acquit-markdown": "./bin/acquit-markdown"
+    "acquit-markdown": "./bin/acquit-markdown.js"
   },
   "scripts": {
     "docs": "node docs.js",
