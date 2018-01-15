@@ -1,6 +1,8 @@
+#!/usr/bin/node
+
 'use strict';
 
-const acquit = require('../lib');
+const acquit = require('acquit');
 const commander = require('commander');
 const fs = require('fs');
 
@@ -14,6 +16,8 @@ if (!commander.path) {
   throw 'Need to set --path!';
 }
 
+require('../')();
+
 if (commander.require) {
   const plugins = Array.isArray(commander.require) ? commander.require : [commander.require];
 
@@ -24,6 +28,6 @@ if (commander.require) {
 
 const contents = fs.readFileSync(commander.path).toString();
 const header = commander.header ? fs.readFileSync(commander.header, 'utf8') : '';
-const parsed = acquit.parse(fs.readFileSync(commander.path, 'utf8'));
+const markdown = acquit.parse(fs.readFileSync(commander.path, 'utf8'));
 
 console.log(`${header}\n\n${markdown}`);
