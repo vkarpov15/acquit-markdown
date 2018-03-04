@@ -17,7 +17,7 @@ if (!commander.path) {
   throw 'Need to set --path!';
 }
 
-require('../')({ it: commander.it });
+require('../')(acquit, { it: commander.it ? true : false });
 
 if (commander.require) {
   const plugins = Array.isArray(commander.require) ? commander.require : [commander.require];
