@@ -1,26 +1,25 @@
 'use strict';
 
-var acquit = require('acquit');
-
 module.exports = plugin;
 
 function plugin(instance, options) {
   if (instance) {
-    instance.output(markdown(options));
+    instance.output(markdown(options, instance));
   } else {
-    acquit.output(markdown(options));
+    const acquit = require('acquit');
+    acquit.output(markdown(options, acquit));
   }
 };
 
 plugin.markdown = markdown;
 
-function markdown(options) {
+function markdown(options, acquit) {
   return function(res) {
-    return recurse(res, 0, options);
+    return recurse(res, 0, options, acquit);
   };
 }
 
-function recurse(blocks, level, options) {
+function recurse(blocks, level, options, acquit) {
   var str = '';
   var hashes = getHashes(level + 1);
   for (var i = 0; i < blocks.length; ++i) {
@@ -34,7 +33,7 @@ function recurse(blocks, level, options) {
       str += '\n\n';
     }
     if (blocks[i].type === 'describe') {
-      str += recurse(blocks[i].blocks, level + 1, options);
+      str += recurse(blocks[i].blocks, level + 1, options, acquit);
     } else if (blocks[i].code.trim()) {
       str += ['```javascript', blocks[i].code, '```'].join('\n');
     }
