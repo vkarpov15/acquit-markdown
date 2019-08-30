@@ -34,7 +34,7 @@ function recurse(blocks, level, options, acquit) {
     }
     if (blocks[i].type === 'describe') {
       str += recurse(blocks[i].blocks, level + 1, options, acquit);
-    } else if (blocks[i].code.trim()) {
+    } else if (blocks[i].code.trim() && options.code) {
       str += ['```javascript', blocks[i].code, '```'].join('\n');
     }
     if (i + 1 < blocks.length) {
