@@ -11,6 +11,7 @@ commander.
   option('-r, --require [plugin]', 'Require plugins').
   option('-h, --header [path]', 'Header file').
   option('-i, --it [bool]', 'Whether to prepend "it"').
+  option('-c, --code [bool]', 'Whether to add code to docs').
   parse(process.argv);
 
 if (!commander.path) {
@@ -27,8 +28,29 @@ if (commander.require) {
   }
 }
 
-const contents = fs.readFileSync(commander.path).toString();
 const header = commander.header ? fs.readFileSync(commander.header, 'utf8') : '';
-const markdown = acquit.parse(fs.readFileSync(commander.path, 'utf8'));
+let markdown = '';
 
-console.log(`${header}\n\n${markdown}`);
+if (fs.statSync(commander.path).isDirectory()) {
+  const getFiles = (dir, files_) => {
+    files_ = files_ || [];
+    const files = fs.readdirSync(dir);
+    for (const i in files){
+      const name = dir + '/' + files[i];
+      if (fs.statSync(name).isDirectory()){
+        getFiles(name, files_);
+      } else {
+        files_.push(name);
+      }
+    }
+    return files_;
+  };
+
+  getFiles(commander.path).forEach(file => {
+    markdown += acquit.parse(fs.readFileSync(file, 'utf8'));
+  });
+} else {
+  markdown = acquit.parse(fs.readFileSync(commander.path, 'utf8'));
+}
+
+console.log(`${header ? `${header}\n\n`: ''}${markdown}`);
