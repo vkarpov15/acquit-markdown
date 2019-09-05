@@ -53,6 +53,4 @@ if (fs.statSync(commander.path).isDirectory()) {
   markdown = acquit.parse(fs.readFileSync(commander.path, 'utf8'));
 }
 
-markdown = markdown.replace(/eslint-\S*/g, '').replace(/TODO[\s\S]*$/g, '');
-
 console.log(`${header ? `${header}\n\n`: ''}${markdown}`);
